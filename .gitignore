@@ -1,7 +1,8 @@
-# Credentials
+# Credentials - NEVER commit these
 credentials.json
 token.json
 token.pickle
+.env
 
 # Logs
 *.log
