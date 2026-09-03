@@ -22,6 +22,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseUpload
+from etl_alerts import guard
 
 # Add LlamaParse import
 try:
@@ -1120,6 +1121,9 @@ class MilkbasketAutomation:
 
 def main():
     """Main scheduler"""
+    # Shared disk guard: refuse to write if this pipeline is over its budget
+    # or the volume is full. Emails on warn/stop. Fails open. See etl_alerts.py.
+    guard("grn")
     print("=" * 80)
     print("MILKBASKET GRN SCHEDULER")
     print("Runs every 3 hours")
